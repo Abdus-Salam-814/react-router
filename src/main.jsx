@@ -10,11 +10,15 @@ import Users from './pages/users/Users.jsx'
 import UserDetails from './components/userDetails/UserDetails.jsx'
 import Posts from './components/posts/Posts.jsx'
 import PostDetails from './components/postDetails/PostDetails.jsx'
+import ErrorePage from './components/errorePage/ErrorePage.jsx'
+import Phones from './pages/phones/phones.jsx'
+import PhoneDetails from './components/phoneDetails/PhoneDetails.jsx'
 
 const router = createBrowserRouter([
   {
     path:'/',
     element:<Home></Home>,
+    errorElement: <ErrorePage/>,
     children:[
     
       {
@@ -44,6 +48,17 @@ const router = createBrowserRouter([
         path: '/post/:postID',
         loader: ({params}) => fetch(`https://jsonplaceholder.typicode.com/posts/${params.postID}`),
         element: <PostDetails/>
+      },
+      {
+        path: '/phones',
+        loader: () => fetch(`https://openapi.programming-hero.com/api/phones?search=iphone`),
+        element: <Phones/>
+      },{
+        path:'/phone/:phoneId',
+        loader: ({params}) => fetch(`https://openapi.programming-hero.com/api/phone/${params.phoneId}`),
+
+        element: <PhoneDetails/>
+
       }
     ]
 
